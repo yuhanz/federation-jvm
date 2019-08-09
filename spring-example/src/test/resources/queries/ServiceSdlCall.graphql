@@ -1,0 +1,3 @@
+query ServiceSdlCall {
+    _service { sdl }
+}
