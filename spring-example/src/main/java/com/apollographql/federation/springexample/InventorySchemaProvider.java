@@ -40,6 +40,7 @@ public class InventorySchemaProvider extends DefaultGraphQLSchemaProvider implem
                     }
                     return null;
                 })
+                .includeSchemaDefintion(false)
                 .build());
     }
 

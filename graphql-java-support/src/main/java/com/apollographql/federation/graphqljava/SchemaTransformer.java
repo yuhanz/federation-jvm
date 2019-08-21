@@ -27,6 +27,7 @@ public final class SchemaTransformer {
     private DataFetcher entitiesDataFetcher = null;
     private DataFetcherFactory entitiesDataFetcherFactory = null;
     private Coercing coercingForAny = _Any.defaultCoercing;
+    private boolean isIncludingSchemaDefintion = true;
 
     SchemaTransformer(GraphQLSchema originalSchema) {
         this.originalSchema = originalSchema;
@@ -54,6 +55,11 @@ public final class SchemaTransformer {
 
     public SchemaTransformer coercingForAny(Coercing coercing) {
         this.coercingForAny = coercing;
+        return this;
+    }
+
+    public SchemaTransformer includeSchemaDefintion(boolean include) {
+        this.isIncludingSchemaDefintion = include;
         return this;
     }
 
@@ -138,7 +144,7 @@ public final class SchemaTransformer {
         final SchemaPrinter.Options options = SchemaPrinter.Options.defaultOptions()
                 .includeScalarTypes(true)
                 .includeExtendedScalarTypes(true)
-                .includeSchemaDefintion(true)
+                .includeSchemaDefintion(isIncludingSchemaDefintion)
                 .includeDirectives(true);
         return new SchemaPrinter(options).print(originalSchema);
     }
